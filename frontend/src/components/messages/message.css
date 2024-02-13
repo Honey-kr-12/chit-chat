@@ -1,0 +1,12 @@
+.fullname{
+    color: aqua ;
+}
+
+
+  /* @media screen and (max-width: 998px) { */
+    .containerVisible{
+        /* display: none; */
+        display: none;
+        color: aquamarine;
+      }
+/* } */

@@ -6,22 +6,18 @@ exports.signup = async (req, res) => {
     try {
     const {fullName, username, password, confirmPassword, gender} = req.body;
     if(password.length <=5){
-        return res.status(400).json({
-            status:"fail",
-            message:"password length is minimum 6"
+        return res.status(400).json({error:"password length is minimum 6"
         });
     } 
-    if(password !== confirmPassword) {
-        return res.status(400).json({
-            status:"fail",
-            message:"password doesn't match"
-        });
+    if (password !== confirmPassword) {
+        return res.status(400).json({ error: "Passwords don't match" });
+    
     }
 
     const user = await User.findOne({username});
 
     if(user) {
-        return res.status(400).json({message:"Username already exist"});
+        return res.status(400).json({error:"Username already exist"});
     }
 
     // hash password
@@ -48,14 +44,14 @@ exports.signup = async (req, res) => {
             profilePic: newUser.profilePic,
         })
     } else {
-        res.status(400).json({message:"invalid user data"})
+        res.status(400).json({error :"invalid user data"})
     }
 
     } catch (error) {
         console.log("Error in signup controller", error.message);
         res.status(500).json({
             status:"fail",
-            message:"internal server error"
+            error:"internal server error"
         });
     }
 }
@@ -67,7 +63,7 @@ exports.login = async (req, res) => {
         const isPasswordCorrect = await bcryptjs.compare(password, user?.password || "");
 
         if(!user || !isPasswordCorrect) {
-            return res.status(400).json({message:"Inavalid username or password"});
+            return res.status(400).json({error:"Inavalid username or password"});
         }
 
         generateTokenAndSetCokkie(user._id, res);
@@ -80,12 +76,9 @@ exports.login = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Error in login controller", error.message);
-        res.status(500).json({
-            status:"fail",
-            message:"internal server error"
-        });
-    }
+		console.log("Error in login controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
 }
 
 exports.logout = (req, res) => {
