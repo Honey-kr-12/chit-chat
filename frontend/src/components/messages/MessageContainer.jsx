@@ -3,7 +3,7 @@ import Messages from "./Messages";
 import { TiMessages } from 'react-icons/ti';
 import useConversation from '../../zustand/useConversation';
 import { useEffect, useState } from "react";
-// import './message.css'
+import './message.css'
 import { useAuthContext } from "../../context/AuthContext";
 
 
@@ -19,7 +19,7 @@ const MessageContainer = () => {
 	},[setSelectedConversation])
 
 	return (
-			<div className='md:min-w-[750px] containerVisible flex flex-col'> 
+			<div className='md:min-w-[750px] containerVisible overflow-auto flex flex-col'> 
 			{!selectedConversation ? (
 				<NoChatSelected /> 
 			) : (

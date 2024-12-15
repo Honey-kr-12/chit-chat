@@ -1,13 +1,12 @@
-/* body{
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg5.jpg");
+.homeMain{
+    display: flex;
 }
 
-.homeContainer{
-    display: none;
-} */
 
-/* @media screen and (max-width: 350px) {
-    .messageContainer{
-        display: block;
+@media screen and (max-width: 760px) {
+    .homeMain   {
+        flex-direction: column; 
+        /* height: 100vh; */
+        overflow: auto;
     }
-} */
+}
